@@ -1,10 +1,45 @@
 const express = require('express')
+const { appendFile } = require('fs')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.get('calc', function (req, res) {
+  
+  let num1 = 0;
+  let num2 = 0;
+
+  let operation = req.query.operation;
+
+  try {
+    num1 = parseInt(req.query.num1);
+    num2 = parseInt(req.query.num2);
+
+    if ((typeof (operation) === 'string') && typeof (num1) === 'number' && typeof (num2) === 'number') {
+      if ((operation === 'add') || (operation === 'sub') || (operation === 'mult') || (operation === 'div')) {
+        let result = calc(operation, num1, num2);
+        res.json(result);
+      }
+    }
+  } catch {
+    res.json(null);
+  }
+});
+
+app.listen(serverPort, () => {
+  console.log("Server listening on port: " + serverPort);
+});
+
+function calc(operator, x, y) {
+  let result = 0;
+
+  if (operator == 'add') {
+    result = x + y;
+  } else if (operator == 'sub') {
+    result = x - y;
+  } else if (operator == 'mult') {
+    result = x * y;
+  } else if (operator == 'div') {
+    result = x / y;
+  }
+  return result;
+}
