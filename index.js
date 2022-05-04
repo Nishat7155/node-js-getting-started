@@ -5,7 +5,7 @@ const app = express();
 
 const PORT = process.env.PORT || 5000
 
-app.get('calc', function (req, res) {
+app.get('/calc', function (req, res) {
   
   let num1 = 0;
   let num2 = 0;
