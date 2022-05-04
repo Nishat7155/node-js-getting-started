@@ -7,8 +7,12 @@ const PORT = process.env.PORT || 5000
 
 app.get('/calc', function (req, res) {
   
-  let num1 = 0;
-  let num2 = 0;
+ 
+
+  let num1 = Number(req.query.num1);
+  let num2 = Number(req.query.num2);
+  
+  
 
   let operation = req.query.operation;
 
