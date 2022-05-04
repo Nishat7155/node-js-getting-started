@@ -1,6 +1,8 @@
-const express = require('express')
-const { appendFile } = require('fs')
+const express = require('express');
+
 const path = require('path')
+const app = express();
+
 const PORT = process.env.PORT || 5000
 
 app.get('calc', function (req, res) {
